@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  LambdaResizeImage:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs16.x
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: >-
+        arn:aws:iam::351562031848:role/service-role/LambdaResizeImage-role-l0suonzl
+      Environment:
+        Variables:
+          ALLOWED_DIMENSIONS: '2048x2048,1024x1024'
+          ALLOWED_IMAGE_TYPES: ' .png,.jpeg'
+          BUCKET: destination-images-bucket-zszek
+          CF_DistributionId: ENAKI7TUT0M3H
