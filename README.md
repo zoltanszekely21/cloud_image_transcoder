@@ -60,7 +60,7 @@ Benefits of AWS CloudFront:
 
 <h1 align="center"><img src="/assets/UML.jpg" alt="UML" width=787 height=582></h1>
 
-**Flow:**
+**Workflow:**
 - 1: A user requests a resized image from CloudFront distribution
 - 2: The image is found in the CloudFront distribution; the work flow completes
 - 3: The requested image is not found in the CloudFront, CloudFront requests to get it from origin server destination-images-bucket-zszek
@@ -74,4 +74,19 @@ Benefits of AWS CloudFront:
 - 11: The Lambda function LambdaResizeImage invalidates the response from CloudFront cache for the original request which is 307 redirect for the next same request to pass through
 - 12: The Lambda function LambdaResizeImage returns the requested resized image to the API Gateway APIGatewayResizeImage
 - 13: The API Gateway returns the requested image to the User.
+
+## Lambda funciton test independent of the rest of the workflow.
+
+Steps A, B, C : The ultimate goal of these steps is to upload original images to an S3 bucket where CloudFront can use as an origin server. These steps can be done in isolation from the rest of the automation process.
+
+- Step A: A Developer uploads images to S3 bucket source-image-bucket-zszek.
+- Step B: Lambda function LambdaCopySourceBucketToDestinationBucket gets triggered by S3 bucket source-image-bucket-zszek on ObjectCreated and ObjectRemoved event types.
+- Step C : Lambda function LambdaCopySourceBucketToDestinationBucket gets executed and copies the object over into or removes it from destination-images-bucket-zszek depending on the event type by object key.
+
+<video src="(https://github.com/zoltanszekely21/cloud_image_transcoder/blob/main/assets/source-to-dest.mp4)" width=180/>
+
+I used the s3 console by going into the source bucket and creating an img folder, and then inside the img folder, I upload an image and see if it makes it to the destination folder; similarly the image can be removed from the source bucket and will be removed from the destination bucket as well.
+
+
+
 
