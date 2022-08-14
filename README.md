@@ -85,6 +85,8 @@ Steps A, B, C : The ultimate goal of these steps is to upload original images to
 
 <video src="(https://github.com/zoltanszekely21/cloud_image_transcoder/blob/main/assets/source-to-dest.mp4)" width=180/>
 
+<video src='/assets/source-to-dest.mov' width=180/>
+
 I used the s3 console by going into the source bucket and creating an img folder, and then inside the img folder, I upload an image and see if it makes it to the destination folder; similarly the image can be removed from the source bucket and will be removed from the destination bucket as well.
 
 
