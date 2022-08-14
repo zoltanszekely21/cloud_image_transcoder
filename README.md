@@ -32,11 +32,30 @@ This is helpful during multiple scenarios, especially during an unexpected surge
 
 - Durable: S3 provides a highly durable storage infrastructure. It redundantly stores data in multiple facilities, making our data safe in the event of a system failure. S3 also performs regular data integrity checks to make sure your data is intact.
 
-![Lambda]
+![Lambda](/assets/aws-lambda.png)
 #### Lambda
 - Lambda’s architecture can deliver great benefits over traditional cloud computing setups for applications where: individual tasks run for a short time;
 each task is generally self-contained; there is a large difference between the lowest and highest levels in the workload of the application.
 
 - Some of the most common use cases for AWS Lambda that fit these criteria are: 
 - Scalable APIs. When building APIs using AWS Lambda, one execution of a Lambda function can serve a single HTTP request. Different parts of the API can be routed to different Lambda functions via Amazon API Gateway. AWS Lambda automatically scales individual functions according to the demand for them, so different parts of our API can scale differently according to current usage levels. This allows for cost-effective and flexible API setups.
+
+![APIGW](/assets/)
+#### API Gateway
+- Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale. API developers can create APIs that access AWS or other web services, as well as data stored in the AWS Cloud. We can create APIs for use in our own client applications or we can make our APIs available to third-party app developers. 
+
+- API Gateway creates RESTful APIs that: Are HTTP-based | Enable stateless client-server communication. | Implement standard HTTP methods such as GET, POST, PUT, PATCH, and DELETE.
+
+![Cloudfront](/assets/cf.png)
+#### CloudFront
+Benefits of AWS CloudFront:
+- It will cache your content in edge locations and decrease the workload, thus resulting in high availability of applications.
+- It is simple to use and ensures productivity enhancement.
+- It provides high security with the ‘Content Privacy’ feature.
+- It facilitates GEO targeting service for content delivery to specific end-users.
+- It uses HTTP or HTTPS protocols for quick delivery of content.
+- It is less expensive, as it only charges for the data transfer.
+
+
+
 
