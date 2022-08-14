@@ -40,7 +40,7 @@ each task is generally self-contained; there is a large difference between the l
 - Some of the most common use cases for AWS Lambda that fit these criteria are: 
 - Scalable APIs. When building APIs using AWS Lambda, one execution of a Lambda function can serve a single HTTP request. Different parts of the API can be routed to different Lambda functions via Amazon API Gateway. AWS Lambda automatically scales individual functions according to the demand for them, so different parts of our API can scale differently according to current usage levels. This allows for cost-effective and flexible API setups.
 
-![APIGW](/assets/)
+![APIGW](/assets/api-gw.png)
 #### API Gateway
 - Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale. API developers can create APIs that access AWS or other web services, as well as data stored in the AWS Cloud. We can create APIs for use in our own client applications or we can make our APIs available to third-party app developers. 
 
@@ -56,6 +56,22 @@ Benefits of AWS CloudFront:
 - It uses HTTP or HTTPS protocols for quick delivery of content.
 - It is less expensive, as it only charges for the data transfer.
 
+## UML Diagram
 
+<h1 align="center"><img src="/assets/UML.jpg" alt="UML" width=787 height=582></h1>
 
+**Flow:**
+- 1: A user requests a resized image from CloudFront distribution
+- 2: The image is found in the CloudFront distribution; the work flow completes
+- 3: The requested image is not found in the CloudFront, CloudFront requests to get it from origin server destination-images-bucket-zszek
+- 4: The requested image is found in the origin server destination-images-bucket-zszek ; it returns it to CloudFront, CloudFront returns the request to the user, also CloudFront caches it in all regional edge locations,
+- 5: The requested image is not found in the origin server destination-images-bucket-zszek, the origin server is set up to host as static website and in that we have a routing rule for resources which are not found (400) to respond with 307 redirect to the API Gateway APIGatewayResizeImage endpoint url via CloudFront.
+- 6: The user browser makes a request to the API Gateway
+- 7: The Lambda function LambdaResizeImage is triggered by the API Gateway
+- 8: The Lambda function LambdaResizeImage gets the original image from S3 bucket destination-images-bucket-zszek.
+- 9: The S3 bucket destination-images-bucket-zszek returns the original image
+- 10: After the Lambda function LambdaResizeImage completes its resizing operations, it puts the processed image into S3 bucket destination-images-bucket-zszek
+- 11: The Lambda function LambdaResizeImage invalidates the response from CloudFront cache for the original request which is 307 redirect for the next same request to pass through
+- 12: The Lambda function LambdaResizeImage returns the requested resized image to the API Gateway APIGatewayResizeImage
+- 13: The API Gateway returns the requested image to the User.
 
