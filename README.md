@@ -61,6 +61,15 @@ Benefits of AWS CloudFront:
 <h1 align="center"><img src="/assets/UML.jpg" alt="UML" width=787 height=582></h1>
 
 **Workflow:**
+
+Steps A, B, C : The ultimate goal of these steps is to upload original images to an S3 bucket where CloudFront can use as an origin server. These steps can be done in isolation from the rest of the automation process.
+
+- Step A: A Developer uploads images to S3 bucket source-image-bucket-zszek.
+- Step B: Lambda function LambdaCopySourceBucketToDestinationBucket gets triggered by S3 bucket source-image-bucket-zszek on ObjectCreated and ObjectRemoved event types.
+- Step C : Lambda function LambdaCopySourceBucketToDestinationBucket gets executed and copies the object over into or removes it from destination-images-bucket-zszek depending on the event type by object key.
+
+
+
 - 1: A user requests a resized image from CloudFront distribution
 - 2: The image is found in the CloudFront distribution; the work flow completes
 - 3: The requested image is not found in the CloudFront, CloudFront requests to get it from origin server destination-images-bucket-zszek
